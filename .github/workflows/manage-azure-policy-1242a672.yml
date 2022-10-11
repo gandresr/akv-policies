@@ -1,0 +1,72 @@
+name: manage-azure-policy-1242a672
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Updating Azure Policies'
+
+
+## Uncomment the following if you wish to automatically trigger workflow run with every commit
+#
+#  push:
+#    paths:
+#      - 'data_plane/policies/Secrets_should_have_the_specified_maximum_validity_period_342e8053-e12e-4c44-be01-c3c2f318400f/**'
+#      - 'data_plane/policies/Secrets_should_have_more_than_the_specified_number_of_days_before_expiration_b0eb591a-5e70-4534-a8bf-04b9c489584a/**'
+#      - 'data_plane/policies/Key_Vault_secrets_should_have_an_expiration_date_98728c90-32c7-4049-8429-847dc0f4fe37/**'
+#      - 'data_plane/policies/Secrets_should_have_content_type_set_75262d3e-ba4a-4f43-85f8-9f72c090e5e3/**'
+#      - 'data_plane/policies/Secrets_should_not_be_active_for_longer_than_the_specified_number_of_days_e8d99835-8a06-45ae-a8e0-87a91941ccfe/**'
+#      - 'data_plane/policies/Keys_should_have_the_specified_maximum_validity_period_49a22571-d204-4c91-a7b6-09b1a586fbc9/**'
+#      - 'data_plane/policies/Keys_using_RSA_cryptography_should_have_a_specified_minimum_key_size_82067dbb-e53b-4e06-b631-546d197452d9/**'
+#      - 'data_plane/policies/Keys_should_be_backed_by_a_hardware_security_module_(HSM)_587c79fe-dd04-4a5e-9d0b-f89598c7261b/**'
+#      - 'data_plane/policies/Keys_should_have_more_than_the_specified_number_of_days_before_expiration_5ff38825-c5d8-47c5-b70e-069a21955146/**'
+#      - 'data_plane/policies/Key_Vault_keys_should_have_an_expiration_date_152b15f7-8e1f-4c1f-ab71-8c010ba5dbc0/**'
+#      - 'data_plane/policies/Keys_using_elliptic_curve_cryptography_should_have_the_specified_curve_names_ff25f3c8-b739-4538-9d07-3d6d25cfb255/**'
+#      - 'data_plane/policies/Keys_should_be_the_specified_cryptographic_type_RSA_or_EC_75c4f823-d65c-4f29-a733-01d0077fdbcb/**'
+#      - 'data_plane/policies/Keys_should_not_be_active_for_longer_than_the_specified_number_of_days_c26e4b24-cf98-4c67-b48b-5a25c4c69eb9/**'
+#      - 'data_plane/policies/_Preview_Certificates_should_have_the_specified_maximum_validity_period_0a075868-4c26-42ef-914c-5bc007359560/**'
+#      - 'data_plane/policies/Certificates_using_RSA_cryptography_should_have_the_specified_minimum_key_size_cee51871-e572-4576-855c-047c820360f0/**'
+#      - 'data_plane/policies/Certificates_should_have_the_specified_lifetime_action_triggers_12ef42cb-9903-4e39-9c26-422d29570417/**'
+#      - 'data_plane/policies/Certificates_should_be_issued_by_the_specified_integrated_certificate_authority_8e826246-c976-48f6-b03e-619bb92b3d82/**'
+#      - 'data_plane/policies/Certificates_should_be_issued_by_the_specified_non-integrated_certificate_authority_a22f4a40-01d3-4c7d-8071-da157eeff341/**'
+#      - 'data_plane/policies/_Preview_Certificates_should_not_expire_within_the_specified_number_of_days_f772fb64-8e40-40ad-87bc-7706e1949427/**'
+#      - 'data_plane/policies/Certificates_using_elliptic_curve_cryptography_should_have_allowed_curve_names_bd78111f-4953-4367-9fd5-7e08808b54bf/**'
+#      - 'data_plane/policies/Certificates_should_use_allowed_key_types_1151cede-290b-4ba0-8b38-0ad145ac888f/**'
+#      - .github/workflows/manage-azure-policy-1242a672.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_1242a672}}
+        allow-no-subscriptions: true
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          data_plane/policies/Secrets_should_have_the_specified_maximum_validity_period_342e8053-e12e-4c44-be01-c3c2f318400f/**
+          data_plane/policies/Secrets_should_have_more_than_the_specified_number_of_days_before_expiration_b0eb591a-5e70-4534-a8bf-04b9c489584a/**
+          data_plane/policies/Key_Vault_secrets_should_have_an_expiration_date_98728c90-32c7-4049-8429-847dc0f4fe37/**
+          data_plane/policies/Secrets_should_have_content_type_set_75262d3e-ba4a-4f43-85f8-9f72c090e5e3/**
+          data_plane/policies/Secrets_should_not_be_active_for_longer_than_the_specified_number_of_days_e8d99835-8a06-45ae-a8e0-87a91941ccfe/**
+          data_plane/policies/Keys_should_have_the_specified_maximum_validity_period_49a22571-d204-4c91-a7b6-09b1a586fbc9/**
+          data_plane/policies/Keys_using_RSA_cryptography_should_have_a_specified_minimum_key_size_82067dbb-e53b-4e06-b631-546d197452d9/**
+          data_plane/policies/Keys_should_be_backed_by_a_hardware_security_module_(HSM)_587c79fe-dd04-4a5e-9d0b-f89598c7261b/**
+          data_plane/policies/Keys_should_have_more_than_the_specified_number_of_days_before_expiration_5ff38825-c5d8-47c5-b70e-069a21955146/**
+          data_plane/policies/Key_Vault_keys_should_have_an_expiration_date_152b15f7-8e1f-4c1f-ab71-8c010ba5dbc0/**
+          data_plane/policies/Keys_using_elliptic_curve_cryptography_should_have_the_specified_curve_names_ff25f3c8-b739-4538-9d07-3d6d25cfb255/**
+          data_plane/policies/Keys_should_be_the_specified_cryptographic_type_RSA_or_EC_75c4f823-d65c-4f29-a733-01d0077fdbcb/**
+          data_plane/policies/Keys_should_not_be_active_for_longer_than_the_specified_number_of_days_c26e4b24-cf98-4c67-b48b-5a25c4c69eb9/**
+          data_plane/policies/_Preview_Certificates_should_have_the_specified_maximum_validity_period_0a075868-4c26-42ef-914c-5bc007359560/**
+          data_plane/policies/Certificates_using_RSA_cryptography_should_have_the_specified_minimum_key_size_cee51871-e572-4576-855c-047c820360f0/**
+          data_plane/policies/Certificates_should_have_the_specified_lifetime_action_triggers_12ef42cb-9903-4e39-9c26-422d29570417/**
+          data_plane/policies/Certificates_should_be_issued_by_the_specified_integrated_certificate_authority_8e826246-c976-48f6-b03e-619bb92b3d82/**
+          data_plane/policies/Certificates_should_be_issued_by_the_specified_non-integrated_certificate_authority_a22f4a40-01d3-4c7d-8071-da157eeff341/**
+          data_plane/policies/_Preview_Certificates_should_not_expire_within_the_specified_number_of_days_f772fb64-8e40-40ad-87bc-7706e1949427/**
+          data_plane/policies/Certificates_using_elliptic_curve_cryptography_should_have_allowed_curve_names_bd78111f-4953-4367-9fd5-7e08808b54bf/**
+          data_plane/policies/Certificates_should_use_allowed_key_types_1151cede-290b-4ba0-8b38-0ad145ac888f/**
